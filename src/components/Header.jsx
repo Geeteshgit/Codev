@@ -1,6 +1,5 @@
 "use client";
 
-import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
