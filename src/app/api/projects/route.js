@@ -11,7 +11,7 @@ export async function GET() {
 
         const projects = await Project.find({ user: user._id }).sort({ createdAt : -1 });
         
-        return NextResponse.json(projects);
+        return NextResponse.json(projects, { status: 200 });
 
     } catch (err) {
         console.error(err.message);

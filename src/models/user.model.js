@@ -44,6 +44,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    skills: [
+      {
+        type: String,
+        required: true,
+      }
+    ],
     platforms: [
       {
         type: mongoose.Schema.Types.ObjectId,

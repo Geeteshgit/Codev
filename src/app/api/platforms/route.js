@@ -11,7 +11,7 @@ export async function GET() {
 
         const platforms = await Platform.find({ user: user._id }).sort({ createdAt : -1 });
         
-        return NextResponse.json(platforms);
+        return NextResponse.json(platforms, { status: 200 });
 
     } catch (err) {
         console.error(err.message);

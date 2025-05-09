@@ -1,19 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RiAddLargeLine } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
 import PlatformForm from "./PlatformForm";
 import DashboardPlatformCards from "./DashboardPlatformCards";
+import axios from "axios";
 
 const DashboardCodingPlatforms = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [platforms, setPlatforms] = useState([]);
 
+  useEffect(() => {
+    const getPlatforms = async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/platforms`,
+        { withCredentials: true }
+      );
+      setPlatforms(response.data);
+    };
+    getPlatforms();
+  }, []);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <h2 className="text-lg lg:text-2xl">Coding Platforms</h2>
+        <h2 className="text-xl lg:text-2xl">Coding Platforms</h2>
         <button
           className={`px-4 py-1.5 ${
             isOpen
@@ -34,7 +46,7 @@ const DashboardCodingPlatforms = () => {
         </button>
       </div>
       {isOpen && <PlatformForm setIsOpen={setIsOpen} setPlatforms={setPlatforms} />}
-      <div className="flex flex-col gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
         {platforms.map((platform, idx) => {
           return (
             <DashboardPlatformCards

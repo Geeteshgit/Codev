@@ -31,7 +31,7 @@ const Codefolio = () => {
     >
       <div className="flex flex-col items-start gap-2">
         <div className="w-full flex justify-between items-center gap-4">
-          <h2 className="text-lg lg:text-2xl">Share Your Profile URL</h2>
+          <h2 className="text-xl lg:text-2xl">Share Your Profile URL</h2>
           <span
             className="text-xl p-2 bg-zinc-900 rounded-md cursor-pointer border border-white/10"
             onClick={handleCopy}
@@ -43,18 +43,25 @@ const Codefolio = () => {
           {shareLink}
         </p>
       </div>
-      {user?.github && (
-        <div className="flex items-center gap-2 text-lg sm:text-xl">
-          <IoLogoGithub />
-          <a href={`https://github.com/${user?.github}`} target="_blank">
-            <span className="hover:underline text-blue-500">
-              GitHub : {user?.github}
-            </span>
-          </a>
+      {user?.skills.length > 0 && 
+        <div className="flex flex-col gap-4">
+          <h2 className="text-xl lg:text-2xl">Skills</h2>
+          <div className="flex flex-wrap items-center gap-2">
+            {user?.skills.map((skill, idx) => {
+              return(
+                <span key={idx}
+                className="text-sm sm:text-base py-1 px-4 border border-blue-500 rounded-lg">
+                  {skill}
+                </span>
+              )
+            })}
+          </div>
         </div>
-      )}
-      <DashboardCodingPlatforms />
-      <DashboardProjects />
+      }
+      <div className="flex flex-col gap-6">
+        <DashboardCodingPlatforms />
+        <DashboardProjects />
+      </div>
     </motion.div>
   );
 };
