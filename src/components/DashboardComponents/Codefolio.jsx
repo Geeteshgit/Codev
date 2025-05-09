@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
 import { PiCopy } from "react-icons/pi";
-import { IoCheckmark, IoLogoGithub } from "react-icons/io5";
+import { IoCheckmark } from "react-icons/io5";
 import DashboardCodingPlatforms from "./DashboardCodingPlatforms";
 import DashboardProjects from "./DashboardProjects";
 import { useSelector } from "react-redux";
@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 const Codefolio = () => {
   
   const user = useSelector(state => state.auth.user);
-  const shareLink = `http://localhost:3000/explore/${user?.username}`;
+  const shareLink = `${process.env.NEXT_PUBLIC_API_URL}/explore/${user?.username}`;
   const [isCopied, setIsCopied] = useState(false);
   const handleCopy = async () => {
     try {
@@ -50,7 +50,7 @@ const Codefolio = () => {
             {user?.skills.map((skill, idx) => {
               return(
                 <span key={idx}
-                className="text-sm sm:text-base py-1 px-4 border border-blue-500 rounded-lg">
+                className="text-sm sm:text-base py-1 px-4 border border-blue-500/50 rounded-lg">
                   {skill}
                 </span>
               )

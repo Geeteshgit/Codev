@@ -50,12 +50,12 @@ const DashboardCodingPlatforms = () => {
         {platforms.map((platform, idx) => {
           return (
             <DashboardPlatformCards
-              key={idx}
-              id={platform._id}
-              platform={platform.platform}
-              username={platform.username}
-              highlights={platform.highlights}
-              setPlatforms={setPlatforms}
+            key={idx}
+            id={platform._id}
+            platform={platform.platform}
+            username={platform.username}
+            highlights={platform.highlights}
+            setPlatforms={setPlatforms}
             />
           );
         })}

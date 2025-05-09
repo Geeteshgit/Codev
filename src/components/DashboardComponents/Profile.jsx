@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import React from "react";
@@ -14,38 +14,44 @@ import EditProfileButton from "../ui/EditProfileButton";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector((state) => state.auth.user);
 
   return (
-    <motion.div 
+    <motion.div
       className="black-bg flex flex-col gap-5 p-4 sm:p-8 rounded-md"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}>
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
         <div className="relative w-[125px] h-[125px] sm:w-[200px] sm:h-[200px] border border-zinc-900 rounded-lg">
           <Image
-            src="/user.jpg"
+            src={user?.profilePhoto ? user?.profilePhoto : "/user.jpg"}
             alt="user-img"
             fill
             className="object-cover rounded-lg"
+            onError={(e) => e.target.src("/user.jpg")}
           />
         </div>
         <div className="flex flex-col gap-1">
-          <h3 className="text-2xl sm:text-3xl font-semibold">{user?.username}</h3>
+          <h3 className="text-2xl sm:text-3xl font-semibold">
+            {user?.username}
+          </h3>
           <span className="opacity-75">{user?.email}</span>
           <div className="mt-10 hidden sm:flex flex-col items-start gap-3">
-          <EditProfileButton />
-          <LogoutButton />
+            <EditProfileButton />
+            <LogoutButton />
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-1">
-        <span className="flex items-center gap-1 text-lg">
-          <MdInfoOutline /> About
-        </span>
-        <p className="opacity-75">{user?.about}</p>
-      </div>
+      {user?.about && (
+        <div className="flex flex-col gap-1">
+          <span className="flex items-center gap-1 text-lg">
+            <MdInfoOutline /> About
+          </span>
+          <p className="opacity-75">{user?.about}</p>
+        </div>
+      )}
       {user?.location && (
         <div className="flex flex-col gap-1">
           <span className="flex items-center gap-1 text-lg">
@@ -103,9 +109,9 @@ const Profile = () => {
         </div>
       )}
       <div className="mt-4 sm:hidden flex flex-col items-start gap-3">
-          <EditProfileButton />
-          <LogoutButton />
-          </div>
+        <EditProfileButton />
+        <LogoutButton />
+      </div>
     </motion.div>
   );
 };

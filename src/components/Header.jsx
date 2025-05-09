@@ -31,7 +31,7 @@ const Header = () => {
         onClick={() => setIsOpen(!isOpen)}>
         <CgMenuRight />
       </span>
-      <nav className={`fixed sm:static flex flex-col sm:flex-row items-center gap-5 text-lg top-25 transition-all duration-500 ${isOpen ? 'right-5' : '-right-full'}`}>
+      <nav className={`fixed sm:static flex flex-col sm:flex-row items-center gap-10 sm:gap-5 text-2xl sm:text-lg top-18 transition-all duration-500 py-20 sm:py-0 sm:bg-transparent bg-zinc-900/80 backdrop-blur-md w-full sm:w-auto h-screen sm:h-auto ${isOpen ? 'right-0' : '-right-full'}`}>
         <Link href="/explore" className={linkClass("/explore")} onClick={() => setIsOpen(false)}>
           Explore
         </Link>
@@ -49,16 +49,19 @@ const Header = () => {
             </h3>
           </div>
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-2">
             <Link
               href="/login"
-              className="px-2 sm:px-4 text-sm sm:text-base py-1.5 border border-white/20 rounded-sm hover:bg-zinc-800 hover:border-transparent hover:scale-102 transition-all duration-300"
+              className="px-4 text-xl sm:text-base py-1.5 border border-white/20 rounded-sm hover:bg-zinc-800 hover:border-transparent hover:scale-102 transition-all duration-300"
+              onClick={() => setIsOpen(false)}
+
             >
               Login
             </Link>
             <Link
               href="/signup"
-              className="px-2 sm:px-4 text-sm sm:text-base py-1.5 bg-blue-500 border border-transparent rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-300"
+              className="px-4 text-xl sm:text-base py-1.5 bg-blue-500 border border-transparent rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-300"
+              onClick={() => setIsOpen(false)}
             >
               Signup
             </Link>
