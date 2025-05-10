@@ -31,7 +31,7 @@ const Header = () => {
         onClick={() => setIsOpen(!isOpen)}>
         <CgMenuRight />
       </span>
-      <nav className={`fixed sm:static flex flex-col sm:flex-row items-center gap-10 sm:gap-5 text-2xl sm:text-lg top-18 transition-all duration-500 py-20 sm:py-0 sm:bg-transparent bg-zinc-900/80 backdrop-blur-md w-full sm:w-auto h-screen sm:h-auto ${isOpen ? 'right-0' : '-right-full'}`}>
+      <nav className={`z-[999] fixed sm:static flex flex-col sm:flex-row items-center gap-10 sm:gap-5 text-2xl sm:text-lg top-18 transition-all duration-500 py-20 sm:py-0 sm:bg-transparent bg-zinc-900/80 backdrop-blur-md w-full sm:w-auto h-screen sm:h-auto ${isOpen ? 'right-0' : '-right-full'}`}>
         <Link href="/explore" className={linkClass("/explore")} onClick={() => setIsOpen(false)}>
           Explore
         </Link>

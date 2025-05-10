@@ -5,13 +5,13 @@ const ProfileCodingPlatforms = ({ platforms }) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xl lg:text-2xl">Coding Platforms</h2>
-      {platforms?.length > 0 ? (
+      {platforms.length > 0 ? (
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-            {platforms?.map((platform, idx) => {
+            {platforms.map(platform => {
               return (
                 <ProfilePlatformCards
-                  key={idx}
+                  key={platform._id}
                   platform={platform.platform}
                   username={platform.username}
                   highlights={platform.highlights}

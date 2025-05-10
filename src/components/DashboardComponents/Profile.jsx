@@ -15,6 +15,8 @@ import { useSelector } from "react-redux";
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
+  if(!user) return null;
+  const profileSrc = user.profilePhoto || "/user.jpg";
 
   return (
     <motion.div
@@ -26,82 +28,81 @@ const Profile = () => {
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
         <div className="relative w-[125px] h-[125px] sm:w-[200px] sm:h-[200px] border border-zinc-900 rounded-lg">
           <Image
-            src={user?.profilePhoto ? user?.profilePhoto : "/user.jpg"}
+            src={profileSrc}
             alt="user-img"
             fill
             className="object-cover rounded-lg"
-            onError={(e) => e.target.src("/user.jpg")}
           />
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-2xl sm:text-3xl font-semibold">
-            {user?.username}
+            {user.username}
           </h3>
-          <span className="opacity-75">{user?.email}</span>
+          <span className="opacity-75">{user.email}</span>
           <div className="mt-10 hidden sm:flex flex-col items-start gap-3">
             <EditProfileButton />
             <LogoutButton />
           </div>
         </div>
       </div>
-      {user?.about && (
+      {user.about && (
         <div className="flex flex-col gap-1">
           <span className="flex items-center gap-1 text-lg">
             <MdInfoOutline /> About
           </span>
-          <p className="opacity-75">{user?.about}</p>
+          <p className="opacity-75">{user.about}</p>
         </div>
       )}
-      {user?.location && (
+      {user.location && (
         <div className="flex flex-col gap-1">
           <span className="flex items-center gap-1 text-lg">
             <SlLocationPin /> Location
           </span>
-          <p className="opacity-75">{user?.location}</p>
+          <p className="opacity-75">{user.location}</p>
         </div>
       )}
-      {user?.portfolio && (
+      {user.portfolio && (
         <div className="flex flex-col items-start gap-1">
           <span className="flex items-center gap-1 text-lg">
             <FiBriefcase /> Portfolio
           </span>
-          <a href={user?.portfolio} target="_blank">
+          <a href={user.portfolio} target="_blank">
             <span className="hover:underline hover:opacity-100 opacity-75 flex items-center gap-1">
               View Portfolio <MdArrowOutward />
             </span>
           </a>
         </div>
       )}
-      {user?.linkedIn && (
+      {user.linkedIn && (
         <div className="flex flex-col items-start gap-1">
           <span className="flex items-center gap-1 text-lg">
             <FaLinkedin /> LinkedIn
           </span>
-          <a href={`https://linkedin.com/in/${user?.linkedIn}`} target="_blank">
+          <a href={`https://linkedin.com/in/${user.linkedIn}`} target="_blank">
             <span className="hover:underline hover:opacity-100 opacity-75 flex items-center gap-1">
               Visit LinkedIn <MdArrowOutward />
             </span>
           </a>
         </div>
       )}
-      {user?.github && (
+      {user.github && (
         <div className="flex flex-col items-start gap-1">
           <span className="flex items-center gap-1 text-lg">
             <IoLogoGithub /> GitHub
           </span>
-          <a href={`https://github.com/${user?.github}`} target="_blank">
+          <a href={`https://github.com/${user.github}`} target="_blank">
             <span className="hover:underline hover:opacity-100 opacity-75 flex items-center gap-1">
               Visit GitHub <MdArrowOutward />
             </span>
           </a>
         </div>
       )}
-      {user?.resume && (
+      {user.resume && (
         <div className="flex flex-col items-start gap-1">
           <span className="flex items-center gap-1 text-lg">
             <PiReadCvLogo /> Resume
           </span>
-          <a href={`/${user?.resume}`} target="_blank">
+          <a href={`/${user.resume}`} target="_blank">
             <span className="hover:underline hover:opacity-100 opacity-75 flex items-center gap-1">
               View Resume <MdArrowOutward />
             </span>

@@ -9,18 +9,22 @@ import DashboardProjects from "./DashboardProjects";
 import { useSelector } from "react-redux";
 
 const Codefolio = () => {
-  
+
   const user = useSelector(state => state.auth.user);
-  const shareLink = `${process.env.NEXT_PUBLIC_API_URL}/explore/${user?.username}`;
-  const [isCopied, setIsCopied] = useState(false);
+
+  if(!user) return null;
+
+  const shareLink = `${process.env.NEXT_PUBLIC_API_URL}/explore/${user.username}`;
+  const [copied, setCopied] = useState(false);
+
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(shareLink);
-      setIsCopied(true);
+      setCopied(true);
     } catch (err) {
-      console.error(err.message);
+      console.log(err.message);
     }
-  };
+  }
 
   return (
     <motion.div
@@ -36,18 +40,18 @@ const Codefolio = () => {
             className="text-xl p-2 bg-zinc-900 rounded-md cursor-pointer border border-white/10"
             onClick={handleCopy}
           >
-            {isCopied ? <IoCheckmark /> : <PiCopy />}
+            {copied ? <IoCheckmark /> : <PiCopy />}
           </span>
         </div>
         <p className="hidden sm:block w-full py-2 px-4 bg-zinc-900 rounded-md text-sm sm:text-base border border-white/10">
           {shareLink}
         </p>
       </div>
-      {user?.skills.length > 0 && 
+      {user.skills.length > 0 && 
         <div className="flex flex-col gap-4">
           <h2 className="text-xl lg:text-2xl">Skills</h2>
           <div className="flex flex-wrap items-center gap-2">
-            {user?.skills.map((skill, idx) => {
+            {user.skills.map((skill, idx) => {
               return(
                 <span key={idx}
                 className="text-sm sm:text-base py-1 px-4 border border-blue-500/50 rounded-lg">

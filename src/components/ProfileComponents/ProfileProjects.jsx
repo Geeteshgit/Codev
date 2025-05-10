@@ -7,7 +7,7 @@ import ProfileProjectCards from "./ProfileProjectCards";
 const ProfileProjects = ({ projects }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredProjects = projects?.filter((project) => {
+  const filteredProjects = projects.filter((project) => {
     const term = searchTerm.toLowerCase();
     const name = project.title.toLowerCase();
     const technologies = project.technologies.join(" ").toLowerCase();
@@ -17,7 +17,7 @@ const ProfileProjects = ({ projects }) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xl lg:text-2xl">Projects</h2>
-      {projects?.length > 0 ? (
+      {projects.length > 0 ? (
         <>
           <div className="w-full relative">
             <span className="absolute top-1/2 -translate-y-1/2 left-3 text-lg opacity-50">
@@ -33,10 +33,10 @@ const ProfileProjects = ({ projects }) => {
             />
           </div>
           <div className="flex flex-col gap-8">
-            {filteredProjects?.map((project, idx) => {
+            {filteredProjects.map(project => {
               return (
                 <ProfileProjectCards
-                  key={idx}
+                  key={project._id}
                   title={project.title}
                   description={project.description}
                   link={project.link}

@@ -5,11 +5,11 @@ import ProfileCodingPlatforms from "./ProfileCodingPlatforms";
 const ProfileCodefolio = ({ profileData }) => {
   return (
     <div className="black-bg flex flex-col gap-5 p-4 sm:p-8 rounded-md">
-      {profileData?.skills.length > 0 && (
+      {profileData.skills.length > 0 && (
         <div className="flex flex-col gap-4">
           <h2 className="text-xl lg:text-2xl">Skills</h2>
           <div className="flex flex-wrap items-center gap-2">
-            {profileData?.skills.map((skill, idx) => {
+            {profileData.skills.map((skill, idx) => {
               return (
                 <span
                   key={idx}
@@ -23,8 +23,8 @@ const ProfileCodefolio = ({ profileData }) => {
         </div>
       )}
       <div className="flex flex-col gap-6">
-        <ProfileCodingPlatforms platforms={profileData?.platforms} />
-        <ProfileProjects projects={profileData?.projects} />
+        <ProfileCodingPlatforms platforms={profileData.platforms} />
+        <ProfileProjects projects={profileData.projects} />
       </div>
     </div>
   );

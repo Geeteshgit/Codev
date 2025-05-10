@@ -71,10 +71,10 @@ const DashboardProjects = () => {
           />
       </div>
       <div className="flex flex-col gap-8">
-        {filteredProjects.map((project, idx) => {
+        {filteredProjects.map(project => {
           return (
             <DashboardProjectCards
-            key={idx}
+            key={project._id}
             id={project._id}
             title={project.title}
             description={project.description}

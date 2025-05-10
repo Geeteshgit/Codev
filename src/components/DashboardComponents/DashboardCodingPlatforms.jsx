@@ -47,10 +47,10 @@ const DashboardCodingPlatforms = () => {
       </div>
       {isOpen && <PlatformForm setIsOpen={setIsOpen} setPlatforms={setPlatforms} />}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
-        {platforms.map((platform, idx) => {
+        {platforms.map(platform => {
           return (
             <DashboardPlatformCards
-            key={idx}
+            key={platform._id}
             id={platform._id}
             platform={platform.platform}
             username={platform.username}

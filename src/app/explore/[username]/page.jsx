@@ -11,10 +11,11 @@ import { MdArrowOutward, MdInfoOutline } from "react-icons/md";
 import { PiReadCvLogo } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import { motion } from "motion/react";
+import Loader from "@/components/ui/Loader";
 
 const ProfilePage = ({ params }) => {
   const { username } = use(params);
-  const [profileData, setProfileData] = useState();
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     const getUserProfile = async () => {
@@ -31,6 +32,9 @@ const ProfilePage = ({ params }) => {
     getUserProfile();
   }, []);
 
+  if(!profileData) return <Loader />;
+  const profileImgSrc = profileData.profilePhoto || "/user.jpg";
+
   return (
     <motion.main
       className="px-4 sm:px-12 lg:px-48 py-6 sm:py-12"
@@ -45,55 +49,50 @@ const ProfilePage = ({ params }) => {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="relative w-[125px] h-[125px] sm:w-[200px] sm:h-[200px] border border-zinc-900 rounded-lg">
             <Image
-              src={
-                profileData?.profilePhoto
-                  ? profileData?.profilePhoto
-                  : "/user.jpg"
-              }
+              src={profileImgSrc}
               alt="user-img"
               fill
               className="object-cover rounded-lg"
-              onError={(e) => (e.target.src = "/user.jpg")}
             />
           </div>
           <div className="flex flex-col gap-2">
-            <a href={`mailto:${profileData?.email}`}>
+            <a href={`mailto:${profileData.email}`}>
               <span className="flex items-center gap-1 hover:underline text-lg">
-                {profileData?.email} <MdArrowOutward />
+                {profileData.email} <MdArrowOutward />
               </span>
             </a>
-            {profileData?.about && (
+            {profileData.about && (
               <div className="flex flex-col gap-1">
                 <span className="flex items-center gap-1 text-lg">
                   <MdInfoOutline /> About
                 </span>
-                <p className="opacity-75">{profileData?.about}</p>
+                <p className="opacity-75">{profileData.about}</p>
               </div>
             )}
-            {profileData?.location && (
+            {profileData.location && (
               <div className="flex flex-col gap-1">
                 <span className="flex items-center gap-1 text-lg">
                   <SlLocationPin /> Location
                 </span>
-                <p className="opacity-75">{profileData?.location}</p>
+                <p className="opacity-75">{profileData.location}</p>
               </div>
             )}
           </div>
         </div>
         <div className="flex flex-wrap justify-evenly gap-2 rounded-md p-4 black-bg">
-          {profileData?.portfolio && (
+          {profileData.portfolio && (
             <div className="border border-blue-500/50 black-bg py-2 px-4 rounded-md hover:scale-102 transition-all duration:200">
-              <a href={profileData?.portfolio} target="_blank">
+              <a href={profileData.portfolio} target="_blank">
                 <span className="flex items-center gap-1 opacity-75 hover:underline hover:opacity-100">
                   <FiBriefcase /> Portfolio <MdArrowOutward />
                 </span>
               </a>
             </div>
           )}
-          {profileData?.linkedIn && (
+          {profileData.linkedIn && (
             <div className="border border-blue-500/50 black-bg py-2 px-4 rounded-md hover:scale-102 transition-all duration:200">
               <a
-                href={`https://linkedin.com/in/${profileData?.linkedIn}`}
+                href={`https://linkedin.com/in/${profileData.linkedIn}`}
                 target="_blank"
               >
                 <span className="flex items-center gap-1 opacity-75 hover:underline hover:opacity-100">
@@ -102,10 +101,10 @@ const ProfilePage = ({ params }) => {
               </a>
             </div>
           )}
-          {profileData?.github && (
+          {profileData.github && (
             <div className="border border-blue-500/50 black-bg py-2 px-4 rounded-md hover:scale-102 transition-all duration:200">
               <a
-                href={`https://github.com/${profileData?.github}`}
+                href={`https://github.com/${profileData.github}`}
                 target="_blank"
               >
                 <span className="flex items-center gap-1 opacity-75 hover:underline hover:opacity-100">
@@ -114,9 +113,9 @@ const ProfilePage = ({ params }) => {
               </a>
             </div>
           )}
-          {profileData?.resume && (
+          {profileData.resume && (
             <div className="border border-blue-500/50 black-bg py-2 px-4 rounded-md hover:scale-102 transition-all duration:200">
-              <a href={`/${profileData?.resume}`} target="_blank">
+              <a href={`/${profileData.resume}`} target="_blank">
                 <span className="flex items-center gap-1 opacity-75 hover:underline hover:opacity-100">
                   <PiReadCvLogo /> Resume <MdArrowOutward />
                 </span>

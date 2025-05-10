@@ -4,36 +4,41 @@ import UserCards from "@/components/UserCards";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
-import { motion } from 'motion/react';
+import { motion } from "motion/react";
+import Loader from "@/components/ui/Loader";
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [profiles, setProfiles] = useState([]);
+  const [profiles, setProfiles] = useState(null);
 
   useEffect(() => {
     const getProfiles = async () => {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/users`,
-        { withCredentials: true }
-      );
-      setProfiles(response.data);
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/users`,
+          { withCredentials: true }
+        );
+        setProfiles(response.data);
+      } catch (err) {
+        console.error(err.message);
+      }
     };
     getProfiles();
   }, []);
 
+  if (!profiles) return <Loader />;
+
   const filteredProfiles = profiles.filter(profile => {
     const query = searchTerm.toLowerCase();
     const username = profile.username.toLowerCase();
-    const skills = profile.skills.map(skill => skill.toLowerCase()).join(' ') || '';
-  
-    return (
-      username.includes(query) ||
-      skills.includes(query)
-    );
+    const skills =
+      profile.skills.map((skill) => skill.toLowerCase()).join(" ") || "";
+
+    return username.includes(query) || skills.includes(query);
   });
 
   return (
-    <main className="flex flex-col gap-8 py-10 px-4 sm:px-12 lg:px-20">
+    <main className="flex flex-col gap-6 py-10 px-4 sm:px-12 lg:px-20">
       <h1 className="text-2xl sm:text-4xl font-medium">
         Find Coders & Developers
       </h1>
@@ -50,15 +55,17 @@ const Explore = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </div>
-      <motion.div 
-        className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+      {profiles.length > 0 ? (
+              <motion.div
+        className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}>
-        {filteredProfiles.map((profile, idx) => {
+        transition={{ duration: 0.5 }}
+      >
+        {filteredProfiles.map(profile => {
           return (
             <UserCards
-              key={idx}
+              key={profile._id}
               username={profile.username}
               profilePhoto={profile.profilePhoto}
               about={profile.about}
@@ -69,6 +76,9 @@ const Explore = () => {
           );
         })}
       </motion.div>
+      ) : (
+        <h2 className="text-xl text-center opacity-75">No Coding Platforms To Show!</h2>
+      )}
     </main>
   );
 };
