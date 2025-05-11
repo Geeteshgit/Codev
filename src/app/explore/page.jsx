@@ -28,7 +28,7 @@ const Explore = () => {
 
   if (!profiles) return <Loader />;
 
-  const filteredProfiles = profiles.filter(profile => {
+  const filteredProfiles = profiles.filter((profile) => {
     const query = searchTerm.toLowerCase();
     const username = profile.username.toLowerCase();
     const skills =
@@ -56,28 +56,30 @@ const Explore = () => {
         />
       </div>
       {profiles.length > 0 ? (
-              <motion.div
-        className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        {filteredProfiles.map(profile => {
-          return (
-            <UserCards
-              key={profile._id}
-              username={profile.username}
-              profilePhoto={profile.profilePhoto}
-              about={profile.about}
-              location={profile.location}
-              projects={profile.projects}
-              platforms={profile.platforms}
-            />
-          );
-        })}
-      </motion.div>
+        <motion.div
+          className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {filteredProfiles.map((profile) => {
+            return (
+              <UserCards
+                key={profile._id}
+                username={profile.username}
+                profilePhoto={profile.profilePhoto}
+                about={profile.about}
+                location={profile.location}
+                projects={profile.projects}
+                platforms={profile.platforms}
+              />
+            );
+          })}
+        </motion.div>
       ) : (
-        <h2 className="text-xl text-center opacity-75">No Coding Platforms To Show!</h2>
+        <h2 className="text-xl text-center opacity-75">
+          No Coding Platforms To Show!
+        </h2>
       )}
     </main>
   );

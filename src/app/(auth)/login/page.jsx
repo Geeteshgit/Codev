@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/components/ui/Loader";
 import { login } from "@/redux/features/authSlice";
 import axios from "axios";
 import Link from "next/link";
@@ -11,6 +12,8 @@ import { useDispatch } from "react-redux";
 const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -25,8 +28,9 @@ const Login = () => {
   };
 
   const submitHandler = async (e) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
+      setLoading(true);
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
         loginData,
@@ -36,6 +40,8 @@ const Login = () => {
       router.push("/dashboard");
     } catch (err) {
       console.error(err.message);
+    } finally {
+      setLoading(false);
     }
 
     setLoginData({
@@ -43,6 +49,8 @@ const Login = () => {
       password: "",
     });
   };
+
+  if(loading) return <Loader />;
 
   return (
     <main className="flex justify-center px-4 sm:px-12 lg:px-20 my-12">
@@ -86,7 +94,7 @@ const Login = () => {
               />
             </div>
           </div>
-          <button className="w-full text-sm sm:text-base py-2.5 mt-4 bg-blue-500 rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-200 cursor-pointer">
+          <button type="submit" className="w-full text-sm sm:text-base py-2.5 mt-4 bg-blue-500 rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-200 cursor-pointer">
             Login
           </button>
           <p>OR</p>

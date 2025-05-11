@@ -2,15 +2,22 @@
 
 import { logout } from "@/redux/features/authSlice";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch } from "react-redux";
 
 const LogoutButton = () => {
 
   const dispatch = useDispatch();
+  const router = useRouter();
   const logoutHandler = async () => {
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {}, { withCredentials: true });
-    dispatch(logout());
+    try {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {}, { withCredentials: true });
+      dispatch(logout());
+      router.push('/');
+    } catch (err) {
+      console.error(err.message);
+    }
   }
 
   return (

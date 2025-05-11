@@ -1,18 +1,17 @@
-'use client';
-
 import Footer from "@/components/Footer";
 import Divider from "@/components/ui/Divider";
 import HomepageInfoCards from "@/components/ui/HomepageInfoCards";
 import MarqueeBanner from "@/components/ui/MarqueeBanner";
+import { getUserFromToken } from "@/lib/auth";
 import Link from "next/link";
 import React from "react";
 import { FiShare2 } from "react-icons/fi";
 import { MdArrowOutward } from "react-icons/md";
 import { RiCodeSSlashFill, RiPencilLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
 
-const Home = () => {
-  const user = useSelector((state) => state.auth.user);
+const Home = async () => {
+
+  const user = await getUserFromToken();
   const InfoCards = [
     {
       icon: <RiPencilLine />,
@@ -53,7 +52,7 @@ const Home = () => {
             href={user ? "/dashboard" : "/signup"}
             className="flex items-center gap-1 px-4 sm:px-6 text-sm sm:text-base py-2.5 bg-blue-500 border border-transparent rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-300"
           >
-            Get Started <MdArrowOutward />
+            {user ? <>Dashboard <MdArrowOutward /></> : <>Get Started <MdArrowOutward /></>}
           </Link>
           <Link
             href="/explore"

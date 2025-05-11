@@ -25,7 +25,8 @@ export async function POST(req) {
         if(existingUser) return NextResponse.json({ message: 'User already exists!' }, { status: 400 });
         if(existingUsername) return NextResponse.json({ message: 'Username already taken!' }, { status: 400 });
     
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
     
         const newUser = await User.create({
             username,
