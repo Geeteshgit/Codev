@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import { ReduxProvider } from "./provider";
+import Toast from "@/components/ui/Toast";
 
 export const metadata = {
   title: "Codev - Developer Portfolio Hub",
@@ -16,6 +17,7 @@ export default async function RootLayout({
       <body
         className={`antialiased font-mulish`}
       > 
+      <Toast />
         <ReduxProvider>
           <Header />
           {children}

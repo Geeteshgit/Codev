@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { motion } from "motion/react";
 import Loader from "@/components/ui/Loader";
+import { notifyError } from "@/components/ui/Toast";
 
 const Explore = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +21,7 @@ const Explore = () => {
         );
         setProfiles(response.data);
       } catch (err) {
-        console.error(err.message);
+        notifyError(err.response.data.message);
       }
     };
     getProfiles();

@@ -43,7 +43,7 @@ export async function POST(req) {
         user.projects.push(addedProject._id);
         await user.save();
 
-        return NextResponse.json(addedProject, { status: 201 });
+        return NextResponse.json({addedProject, message: `${addedProject.title} Added Successfully`}, { status: 201 });
 
     } catch (err) {
         console.error(err.message);

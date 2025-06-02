@@ -2,16 +2,18 @@ import React from "react";
 import axios from "axios";
 import { RxCross1 } from "react-icons/rx";
 import { RiShareBoxFill } from "react-icons/ri";
+import { notifyError, notifySuccess } from "../ui/Toast";
 
 const DashboardProjectCards = (props) => {
   const deleteHandler = async (id) => {
     try {
-      await axios.delete(
+      const response = await axios.delete(
         `${process.env.NEXT_PUBLIC_API_URL}/api/projects/${id}`
       );
       props.setProjects((prev) => prev.filter((project) => project._id !== id));
+      notifySuccess(response.data.message);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
   };
 

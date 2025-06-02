@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logout } from "@/redux/features/authSlice";
+import { notifyError, notifySuccess } from "../ui/Toast";
 
 const ChangePassword = () => {
   const router = useRouter();
@@ -34,8 +35,9 @@ const ChangePassword = () => {
       );
       dispatch(logout());
       router.push("/");
+      notifySuccess(response.data.message);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
 
     setPasswordData({
@@ -90,7 +92,7 @@ const ChangePassword = () => {
       </div>
       <button
         type="submit"
-        className="self-end text-sm sm:text-base py-2.5 px-4 mt-4 bg-blue-500 rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-200 cursor-pointer"
+        className="self-end text-base py-2 px-4 mt-4 bg-blue-500 rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-200 cursor-pointer"
       >
         Change Password
       </button>

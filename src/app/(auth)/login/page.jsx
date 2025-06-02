@@ -1,6 +1,7 @@
 "use client";
 
 import Loader from "@/components/ui/Loader";
+import { notifyError, notifySuccess } from "@/components/ui/Toast";
 import { login } from "@/redux/features/authSlice";
 import axios from "axios";
 import Link from "next/link";
@@ -38,8 +39,9 @@ const Login = () => {
       );
       dispatch(login(response.data.user));
       router.push("/dashboard");
+      notifySuccess(`Welcome Back ${response.data.user.username}!`);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     } finally {
       setLoading(false);
     }

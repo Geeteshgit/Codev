@@ -7,6 +7,7 @@ import ProjectForm from "./ProjectForm";
 import axios from "axios";
 import DashboardProjectCards from "./DashboardProjectCards";
 import { IoSearch } from "react-icons/io5";
+import { notifyError } from "../ui/Toast";
 
 const DashboardProjects = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +16,15 @@ const DashboardProjects = () => {
 
   useEffect(() => {
     const getProjects = async () => {
-      const response = await axios.get(
+      try {
+        const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/api/projects`,
         { withCredentials: true }
-      );
-      setProjects(response.data);
+        );
+        setProjects(response.data);
+      } catch (err) {
+        notifyError(err.response.data.message);
+      }
     };
     getProjects();
   }, []);

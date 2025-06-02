@@ -19,7 +19,7 @@ export async function DELETE(req, { params }) {
         user.projects.pull(projectId);
         await user.save();
 
-        return NextResponse.json({ message: 'Project deleted successfully', project }, { status: 200 });
+        return NextResponse.json({ message: `${project.title} deleted successfully`, project }, { status: 200 });
 
     } catch (err) {
         console.error(err.message);

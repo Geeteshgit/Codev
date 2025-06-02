@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { notifyError } from "./Toast";
 
 const LogoutButton = () => {
 
@@ -16,7 +17,7 @@ const LogoutButton = () => {
       dispatch(logout());
       router.push('/');
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
   }
 

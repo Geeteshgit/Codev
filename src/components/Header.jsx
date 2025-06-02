@@ -9,13 +9,17 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
-  const path = usePathname();
+  let path = usePathname();
 
   const [isOpen, setIsOpen] = useState(false);
 
   const linkClass = (href) => {
     return path === href ? "text-blue-500" : "hover:text-blue-500 transition";
   };
+
+  if(path.startsWith('/dashboard'))  {
+    path = '/dashboard';
+  }
 
   return (
     <header className="sticky top-0 left-0 z-[999] black-bg h-18 flex justify-between items-center border-b border-white/10 px-4 sm:px-12 lg:px-20">

@@ -21,7 +21,7 @@ export async function DELETE(req, { params }) {
         user.platforms.pull(platformId);
         await user.save();
 
-        return NextResponse.json({ message: 'Project deleted successfully', platform }, { status: 200 });
+        return NextResponse.json({ message: `${platform.platform} removed successfully`, platform }, { status: 200 });
 
     } catch (err) {
         console.error(err.message);

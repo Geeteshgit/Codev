@@ -8,10 +8,10 @@ import { FaLinkedin } from "react-icons/fa";
 import { FiBriefcase } from "react-icons/fi";
 import { IoLogoGithub } from "react-icons/io5";
 import { MdArrowOutward, MdInfoOutline } from "react-icons/md";
-import { PiReadCvLogo } from "react-icons/pi";
 import { SlLocationPin } from "react-icons/sl";
 import { motion } from "motion/react";
 import Loader from "@/components/ui/Loader";
+import { notifyError } from "@/components/ui/Toast";
 
 const ProfilePage = ({ params }) => {
   const { username } = use(params);
@@ -26,7 +26,7 @@ const ProfilePage = ({ params }) => {
         );
         setProfileData(response.data);
       } catch (err) {
-        console.error(err.message);
+        notifyError(err.response.data.message);
       }
     };
     getUserProfile();
@@ -47,7 +47,7 @@ const ProfilePage = ({ params }) => {
           {username}&apos;s Profile
         </h1>
         <div className="flex flex-col sm:flex-row gap-4">
-          <div className="relative w-[125px] h-[125px] sm:w-[200px] sm:h-[200px] border border-zinc-900 rounded-lg">
+          <div className="relative min-w-[125px] sm:min-w-[200px] w-[125px] h-[125px] sm:w-[200px] sm:h-[200px] border border-zinc-900 rounded-lg">
             <Image
               src={profileImgSrc}
               alt="user-img"
@@ -109,15 +109,6 @@ const ProfilePage = ({ params }) => {
               >
                 <span className="flex items-center gap-1 opacity-75 hover:underline hover:opacity-100">
                   <IoLogoGithub /> GitHub <MdArrowOutward />
-                </span>
-              </a>
-            </div>
-          )}
-          {profileData.resume && (
-            <div className="border border-blue-500/50 black-bg py-2 px-4 rounded-md hover:scale-102 transition-all duration:200">
-              <a href={`/${profileData.resume}`} target="_blank">
-                <span className="flex items-center gap-1 opacity-75 hover:underline hover:opacity-100">
-                  <PiReadCvLogo /> Resume <MdArrowOutward />
                 </span>
               </a>
             </div>

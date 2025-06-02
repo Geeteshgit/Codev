@@ -40,7 +40,7 @@ export async function POST(req) {
         user.platforms.push(insertedPlatform._id);
         await user.save();
 
-        return NextResponse.json(insertedPlatform, { status: 201 });
+        return NextResponse.json({insertedPlatform, message: `${insertedPlatform.platform} Added Successfully`}, { status: 201 });
 
     } catch (err) {
         console.error(err.message);

@@ -8,7 +8,6 @@ import { IoLogoGithub } from "react-icons/io";
 import { MdArrowOutward, MdInfoOutline } from "react-icons/md";
 import { SlLocationPin } from "react-icons/sl";
 import { motion } from "motion/react";
-import { PiReadCvLogo } from "react-icons/pi";
 import LogoutButton from "../ui/LogoutButton";
 import EditProfileButton from "../ui/EditProfileButton";
 import { useSelector } from "react-redux";
@@ -93,18 +92,6 @@ const Profile = () => {
           <a href={`https://github.com/${user.github}`} target="_blank">
             <span className="hover:underline hover:opacity-100 opacity-75 flex items-center gap-1">
               Visit GitHub <MdArrowOutward />
-            </span>
-          </a>
-        </div>
-      )}
-      {user.resume && (
-        <div className="flex flex-col items-start gap-1">
-          <span className="flex items-center gap-1 text-lg">
-            <PiReadCvLogo /> Resume
-          </span>
-          <a href={`/${user.resume}`} target="_blank">
-            <span className="hover:underline hover:opacity-100 opacity-75 flex items-center gap-1">
-              View Resume <MdArrowOutward />
             </span>
           </a>
         </div>

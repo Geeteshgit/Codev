@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import React, { useState } from "react";
+import { notifyError, notifySuccess } from "../ui/Toast";
 
 const ProjectForm = ({ setIsOpen, setProjects }) => {
   const [projectData, setProjectData] = useState({
@@ -23,11 +24,12 @@ const ProjectForm = ({ setIsOpen, setProjects }) => {
     try {
       e.preventDefault();
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`, projectData, { withCredentials: true });
-      const newProject = response.data;
+      const newProject = response.data.addedProject;
       setProjects(prev => [...prev, newProject]);
       setIsOpen(false);
+      notifySuccess(response.data.message);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
   };
 

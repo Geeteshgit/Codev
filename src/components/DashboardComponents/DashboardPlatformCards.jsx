@@ -3,6 +3,7 @@ import axios from "axios";
 import Image from "next/image";
 import { RiShareBoxFill } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
+import { notifyError, notifySuccess } from "../ui/Toast";
 
 const getPlatformDetails = (platform, username) => {
   switch (platform) {
@@ -26,10 +27,11 @@ const getPlatformDetails = (platform, username) => {
 const DashboardPlatformCards = (props) => {
   const deleteHandler = async (id) => {
     try {
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/platforms/${id}`);
+      const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/platforms/${id}`);
       props.setPlatforms(prev => prev.filter(platform => platform._id !== id));
+      notifySuccess(response.data.message);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
   }
 

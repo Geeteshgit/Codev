@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from 'axios';
+import { notifyError, notifySuccess } from "../ui/Toast";
 
 const codingPlatforms = [
   "LeetCode",
@@ -31,11 +32,12 @@ const PlatformForm = ({ setIsOpen, setPlatforms }) => {
     try {
       e.preventDefault();
       const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/platforms`, platformData, { withCredentials: true });
-      const newPlatform = response.data;
+      const newPlatform = response.data.insertedPlatform;
       setPlatforms(prev => [...prev, newPlatform]);
       setIsOpen(false);
+      notifySuccess(response.data.message);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
   };
 

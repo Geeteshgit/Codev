@@ -6,6 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 import PlatformForm from "./PlatformForm";
 import DashboardPlatformCards from "./DashboardPlatformCards";
 import axios from "axios";
+import { notifyError } from "../ui/Toast";
 
 const DashboardCodingPlatforms = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,11 +14,15 @@ const DashboardCodingPlatforms = () => {
 
   useEffect(() => {
     const getPlatforms = async () => {
-      const response = await axios.get(
+      try {
+        const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_URL}/api/platforms`,
         { withCredentials: true }
-      );
-      setPlatforms(response.data);
+        );
+        setPlatforms(response.data);
+      } catch (err) {
+        notifyError(err.response.data.message);
+      }
     };
     getPlatforms();
   }, []);

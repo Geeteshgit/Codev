@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { notifyError, notifySuccess } from "../ui/Toast";
 
 const DeleteAccount = () => {
   const dispatch = useDispatch();
@@ -23,8 +24,9 @@ const DeleteAccount = () => {
       );
       dispatch(logout());
       router.push("/");
+      notifySuccess(response.data.message);
     } catch (err) {
-      console.error(err.message);
+      notifyError(err.response.data.message);
     }
   };
 
