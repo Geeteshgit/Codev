@@ -79,7 +79,7 @@ const Explore = () => {
         </motion.div>
       ) : (
         <h2 className="text-xl text-center opacity-75">
-          No Coding Platforms To Show!
+          No Profiles To Show!
         </h2>
       )}
     </main>
