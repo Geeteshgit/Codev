@@ -7,7 +7,7 @@
 - 👤 **Profile Showcase**  
   - Add coding platform usernames (e.g., LeetCode, GitHub)  
   - List skills and upload projects  
-  - Upload profile photo and resume (PDF) to Cloudinary  
+  - Upload profile photo to Cloudinary  
 
 - 🧭 **Explore Page**  
   - Browse developers by skill  
