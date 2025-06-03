@@ -130,8 +130,6 @@ const Signup = () => {
           >
             Sign Up
           </button>
-          <p>OR</p>
-          <div className="google-login">Google Login Button</div>
         </form>
         <p>
           {"Already have an account? "}

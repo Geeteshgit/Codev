@@ -99,8 +99,6 @@ const Login = () => {
           <button type="submit" className="w-full text-sm sm:text-base py-2.5 mt-4 bg-blue-500 rounded-sm hover:bg-blue-600 hover:scale-102 transition-all duration-200 cursor-pointer">
             Login
           </button>
-          <p>OR</p>
-          <div className="google-login">Google Login Button</div>
         </form>
         <p>
           {"Don't have an account? "}

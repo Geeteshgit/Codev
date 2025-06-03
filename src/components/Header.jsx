@@ -39,9 +39,6 @@ const Header = () => {
         <Link href="/explore" className={linkClass("/explore")} onClick={() => setIsOpen(false)}>
           Explore
         </Link>
-        <Link href="/discuss" className={linkClass("/discuss")} onClick={() => setIsOpen(false)}>
-          Discuss
-        </Link>
         {user ? (
           <div className="flex items-center gap-5">
             <Link href="/dashboard" className={linkClass("/dashboard")} onClick={() => setIsOpen(false)}>
