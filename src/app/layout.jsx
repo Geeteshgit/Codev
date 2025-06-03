@@ -6,6 +6,9 @@ import Toast from "@/components/ui/Toast";
 export const metadata = {
   title: "Codev - Developer Portfolio Hub",
   description: "Codev is a developer portfolio platform that lets you showcase your coding profiles, projects, and skills—all in one place. Instantly connect your GitHub, LeetCode, Codeforces, and more to build a powerful, sharable profile that replaces cluttered resume links.",
+  icons: {
+    icon: '/favicon.png'
+  }
 };
 
 export default async function RootLayout({
