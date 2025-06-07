@@ -19,7 +19,9 @@
 
 ## 📁 Folder Structure
 
-src/
+  ```bash
+
+  src/
 ├── app/
 │   ├── (auth)/                      # Authentication pages
 │   │   ├── login/                  
@@ -53,6 +55,8 @@ src/
 
 public/
 └── platforms/                       # Platform logos/icons
+
+```
 
 ## 🛠️ Setup & Installation
 
